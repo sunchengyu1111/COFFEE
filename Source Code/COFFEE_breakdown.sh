@@ -1,0 +1,15 @@
+mpirun -np 1 ./typical_+C2R 1000  1000   >> COFFEE_breakdown.log
+mpirun -np 1 ./typical_+C2R 2000  2000   >> COFFEE_breakdown.log
+mpirun -np 1 ./typical_+C2R 4000  4000   >> COFFEE_breakdown.log
+mpirun -np 1 ./typical_+C2R 8000  8000   >> COFFEE_breakdown.log
+mpirun -np 1 ./typical_+C2R 16000 16000  >> COFFEE_breakdown.log
+mpirun -np 1 ./typical_+C2R+blocking 1000  1000   >> COFFEE_breakdown.log
+mpirun -np 1 ./typical_+C2R+blocking 2000  2000   >> COFFEE_breakdown.log
+mpirun -np 1 ./typical_+C2R+blocking 4000  4000   >> COFFEE_breakdown.log
+mpirun -np 1 ./typical_+C2R+blocking 8000  8000   >> COFFEE_breakdown.log
+mpirun -np 1 ./typical_+C2R+blocking 16000 16000  >> COFFEE_breakdown.log
+mpirun -np 1 ./typical_+all 1000  1000   >> COFFEE_breakdown.log
+mpirun -np 1 ./typical_+all 2000  2000   >> COFFEE_breakdown.log
+mpirun -np 1 ./typical_+all 4000  4000   >> COFFEE_breakdown.log
+mpirun -np 1 ./typical_+all 8000  8000   >> COFFEE_breakdown.log
+mpirun -np 1 ./typical_+all 16000 16000  >> COFFEE_breakdown.log

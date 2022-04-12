@@ -1,0 +1,16 @@
+valgrind --tool=cachegrind ./typical_row 2000 2000   >> typical_rowcolcache.log
+valgrind --tool=cachegrind ./typical_row 4000 4000   >> typical_rowcolcache.log
+valgrind --tool=cachegrind ./typical_row 6000 6000   >> typical_rowcolcache.log
+valgrind --tool=cachegrind ./typical_row 8000 8000   >> typical_rowcolcache.log
+valgrind --tool=cachegrind ./typical_row 10000 10000 >> typical_rowcolcache.log
+valgrind --tool=cachegrind ./typical_row 12000 12000 >> typical_rowcolcache.log
+valgrind --tool=cachegrind ./typical_row 14000 14000 >> typical_rowcolcache.log
+valgrind --tool=cachegrind ./typical_row 16000 16000 >> typical_rowcolcache.log
+valgrind --tool=cachegrind ./typical_col 2000 2000   >> typical_rowcolcache.log
+valgrind --tool=cachegrind ./typical_col 4000 4000   >> typical_rowcolcache.log
+valgrind --tool=cachegrind ./typical_col 6000 6000   >> typical_rowcolcache.log
+valgrind --tool=cachegrind ./typical_col 8000 8000   >> typical_rowcolcache.log
+valgrind --tool=cachegrind ./typical_col 10000 10000 >> typical_rowcolcache.log
+valgrind --tool=cachegrind ./typical_col 12000 12000 >> typical_rowcolcache.log
+valgrind --tool=cachegrind ./typical_col 14000 14000 >> typical_rowcolcache.log
+valgrind --tool=cachegrind ./typical_col 16000 16000 >> typical_rowcolcache.log
