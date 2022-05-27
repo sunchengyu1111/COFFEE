@@ -11,7 +11,7 @@ COFFEE is a tool for fast and efficient executions of the Sinkhorn-Knopp (SK) al
 
 ## Hardware platform
 
-                 |AMD    |Intel  |ARM V8 |
+\                |AMD    |Intel  |ARM V8 |
 -----------------|-------|-------|-------|
 Number of Cores  |8      |12     |10     |
 Frequency        |2.9 GHz|2.9 GHz|3.2 GHz|
