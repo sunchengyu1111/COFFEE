@@ -25,6 +25,17 @@ RAM              |16 GB  |48 GB  |16 GB  |
 $ cd src && make
 ```
 
+## Running
+Every executable file has a corresponding .sh file with the same name.
+For example, you can run COFFEE_serial with COFFEE_serial.sh.
+```bash
+$ sh COFFEE_serial.sh
+```
+
+## Result
+When finishing executing, you can find running time result in .log file with the same name.
+For example, COFFEE_serial.log.
+
 ## Contributor
 [@sunchengyu1111](https://github.com/sunchengyu1111)
 
