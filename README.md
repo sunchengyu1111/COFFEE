@@ -19,3 +19,8 @@ L1 cache         |512 KB |64 KB  |320 KB |
 L2 cache         |4 MB   |256KB  |12MB   |
 L3 cache         |8 MB   |12 MB  |None   |
 RAM              |16 GB  |48 GB  |16 GB  |
+
+## Compile and install
+```bash
+$ cd src && make
+```
