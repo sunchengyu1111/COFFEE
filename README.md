@@ -33,7 +33,7 @@ $ sh COFFEE_serial.sh
 ```
 
 ## Result
-When finishing executing, you can find running time result in .log file with the same name.
+When finishing executing, you can find running time results in .log file with the same name.
 For example, COFFEE_serial.log.
 
 ## Contributor
