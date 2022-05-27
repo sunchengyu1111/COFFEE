@@ -27,4 +27,5 @@ $ cd src && make
 
 ## Contributor
 [@sunchengyu1111](https://github.com/sunchengyu1111)
+
 Contact: Chengyu Sun (scyna1024@gmail.com)
