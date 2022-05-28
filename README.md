@@ -8,6 +8,7 @@ COFFEE is a tool for fast and efficient executions of the Sinkhorn-Knopp (SK) al
 ## Software dependences
 * [GNU Compiler (GCC)](https://gcc.gnu.org/)
 * [MPICH](https://mpich.org/)
+
 We use GCC 9.3.0 and MPICH 3.4.0 to implement COFFEE. You can also use other compilers such as [Clang](https://clang.llvm.org/) and other MPI open source software such as [Open MPI](https://www.open-mpi.org/).
 
 ## Hardware platform
@@ -21,7 +22,7 @@ L2 cache         |4 MB   |256KB  |12MB   |
 L3 cache         |8 MB   |12 MB  |None   |
 RAM              |16 GB  |48 GB  |16 GB  |
 
-We implement COFFEE using the above hardware platform.
+We implement COFFEE using the above hardware platform. But COFFEE is equally applicable to other platforms and supercomputers.
 
 ## Compile and install
 other super
