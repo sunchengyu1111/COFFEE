@@ -22,7 +22,7 @@ L2 cache         |4 MB   |256KB  |12MB   |
 L3 cache         |8 MB   |12 MB  |None   |
 RAM              |16 GB  |48 GB  |16 GB  |
 
-We implement COFFEE using the above hardware platform. But COFFEE is equally applicable to other platforms and supercomputers.
+We implement COFFEE using the above hardware platform. However, COFFEE is equally applicable to other platforms and supercomputers.
 
 ## Compile and install
 Our makefile is based on [GNU Compiler (GCC)](https://gcc.gnu.org/) and can be compiled on the Tianhe series of supercomputers by the following command.
@@ -37,7 +37,7 @@ For example, you can run COFFEE_serial with COFFEE_serial.sh in single-node.
 ```bash
 $ sh COFFEE_serial.sh
 ```
-You can also run on multiple nodes on a supercomputer or in a distributed environment built by yourself. Here is a tutorial [Running an MPI Cluster within a LAN](https://mpitutorial.com/tutorials/running-an-mpi-cluster-within-a-lan/) to help you build an MPI cluster environment.
+You can also run on multi-nodes on a supercomputer or in a distributed environment built by yourself. Here is a tutorial [Running an MPI Cluster within a LAN](https://mpitutorial.com/tutorials/running-an-mpi-cluster-within-a-lan/) to help you build an MPI cluster environment.
 
 ## Result
 When finishing executing, you can find running time results in .log file with the same name.
