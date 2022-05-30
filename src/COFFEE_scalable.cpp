@@ -255,7 +255,7 @@ int main(int argc,char *argv[]){
 					allreduce_sumofcol[j]+=local_sumofcol[j+(i-1)*each_iterlength];
 				}
 				//do i-1 allreduce
-				usleep(35000);
+				usleep(160000);
 				MPI_Allreduce(allreduce_sumofcol,local_sumofcol+(i-1)*each_iterlength,each_iterlength,MPI_DOUBLE,MPI_SUM,manager_comm);
 				//check
 				if(i==1) MPI_Wait(&manager_request,&manager_status);
@@ -342,7 +342,7 @@ int main(int argc,char *argv[]){
                         for(int j=0;j<each_iterlength;j++){
                                 allreduce_sumofcol[j]+=local_sumofcol[j+(total_iternum-1)*each_iterlength];
                         }
-			usleep(35000);
+			usleep(160000);
                         MPI_Allreduce(allreduce_sumofcol,local_sumofcol+(total_iternum-1)*each_iterlength,each_iterlength,MPI_DOUBLE,MPI_SUM,manager_comm);
 			/*                              
                         printf("rank:%d,here9,allreduce_sumofcol\n",world_rank);
