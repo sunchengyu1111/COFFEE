@@ -136,7 +136,6 @@ int main(int argc,char *argv[]){
                         local_sumofcol[i]=temp;
 		}
 
-		//do first iteration
 		if(MPI_COMM_NULL!=worker_comm){
 			MPI_Reduce(local_sumofcol,reduce_sumofcol,each_iterlength,MPI_DOUBLE,MPI_SUM,0,worker_comm);
 			/*
@@ -149,8 +148,6 @@ int main(int argc,char *argv[]){
 			printf("\n");
 			*/
 		}
-			
-		//do next total_iternum-1 iteration
 		for(int i=1;i<total_iternum;i++){
 			if(local_rank==0){
 				MPI_Send(reduce_sumofcol,each_iterlength,MPI_DOUBLE,local_size-1,0,local_comm);
@@ -165,7 +162,6 @@ int main(int argc,char *argv[]){
 				printf("\n");
 				*/
 			}
-			
 			if(MPI_COMM_NULL!=worker_comm){
                         	MPI_Reduce(local_sumofcol+i*each_iterlength,reduce_sumofcol,each_iterlength,MPI_DOUBLE,MPI_SUM,0,worker_comm);
                        		/* 		
@@ -178,7 +174,6 @@ int main(int argc,char *argv[]){
                        	 	}
                         	*/
                 	}
-			
 			if(MPI_COMM_NULL!=leader_comm){
 				for(int j=0;j<each_iterlength;j++){
 					allreduce_sumofcol[j]+=local_sumofcol[j+(i-1)*each_iterlength];
@@ -193,7 +188,6 @@ int main(int argc,char *argv[]){
 				printf("\n");
                 	        */
                 	}
-			
 			MPI_Bcast(local_sumofcol+(i-1)*each_iterlength,each_iterlength,MPI_DOUBLE,local_size-1,local_comm);
 			/*
                         printf("rank:%d,here5,local_sumofcol\n",world_rank);
@@ -203,7 +197,6 @@ int main(int argc,char *argv[]){
                         printf("\n");
                        	*/
 		}
-		
                 if(local_rank==0){
                         MPI_Send(reduce_sumofcol,each_iterlength,MPI_DOUBLE,local_size-1,0,local_comm);
                 }
@@ -217,7 +210,6 @@ int main(int argc,char *argv[]){
                         printf("\n");
                         */
                 }
-		
                 if(MPI_COMM_NULL!=leader_comm){
                         for(int j=0;j<each_iterlength;j++){
                                 allreduce_sumofcol[j]+=local_sumofcol[j+(total_iternum-1)*each_iterlength];
@@ -232,7 +224,6 @@ int main(int argc,char *argv[]){
                        	printf("\n");
 			*/
                 }
-		
 		MPI_Bcast(local_sumofcol+(total_iternum-1)*each_iterlength,each_iterlength,MPI_DOUBLE,local_size-1,local_comm);
 		/*		
 		printf("rank:%d,here8,local_sumofcol\n",world_rank);
