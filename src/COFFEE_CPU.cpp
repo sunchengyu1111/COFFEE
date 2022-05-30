@@ -43,7 +43,7 @@ int main(int argc,char *argv[]){
 	MPI_Bcast(sumofrow,m*w,MPI_DOUBLE,0,MPI_COMM_WORLD);
 	MPI_Bcast(sumofcol,n,MPI_DOUBLE,0,MPI_COMM_WORLD);
 	
-	//start loop
+	//start
 	int count=0;
 	double error=0;
 	bool loop=true;
@@ -75,16 +75,6 @@ int main(int argc,char *argv[]){
 		}
 
 		//col
-		/*
-		for(int i=0;i<n;i++){
-			double temp=0;
-			for(int j=0;j<m;j++){
-				temp+=local_sinkhorn[i+j*n];
-			}
-			local_sumofcol[i]=temp;
-		}
-		*/
-		
 		__m256d vec_0=_mm256_setzero_pd();__m256d vec_1=_mm256_setzero_pd();__m256d vec_2=_mm256_setzero_pd();__m256d vec_3=_mm256_setzero_pd();
 		__m256d vec_t=_mm256_setzero_pd();__m256d res=_mm256_setzero_pd();
 		for(int i=0;i<n;i++) local_sumofcol[i]=0;
@@ -102,7 +92,6 @@ int main(int argc,char *argv[]){
 			if(tep1==n) {tep1=0;p0=p2;}
 			else p0+=8;
 		}
-		
 		MPI_Allreduce(local_sumofcol,allreduce_sumofcol,n,MPI_DOUBLE,MPI_SUM,MPI_COMM_WORLD);
 		const int ii=1000,jj=4,kk=m/jj,hh=m%jj;
 		double temp[ii];
@@ -165,14 +154,7 @@ int main(int argc,char *argv[]){
 			y0=x0,y1=x1,y2=x2,y3=x3;
 			z0=y0,z1=y1,z2=y2,z3=y3;
 		}
-		/*
-		for(int i=0;i<n;i++){
-			double temp=sumofcol[i]/allreduce_sumofcol[i];
-			for(int j=0;j<m;j++){
-				local_sinkhorn[i+j*n]*=temp;
-			}
-		}
-		*/
+	
 		//cal error
 		double temp1=0,temp2=0;
 		for(int i=0;i<m*n;i++){
