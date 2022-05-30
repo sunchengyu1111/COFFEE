@@ -347,25 +347,25 @@ int main(int argc,char *argv[]){
 					z0=y0,z1=y1,z2=y2,z3=y3;
 				}
 				if(hh){
-                                                        if(hh==2){
-                                                                for(int t=0;t<ii;t++,z0++,z1++){
-                                                                        *z0*=tmp[t];
-                                                                        *z1*=tmp[t];
-                                                                }   
-                                                        }   
-                                                        if(hh==1){
-                                                                for(int t=0;t<ii;t++,z0++){
-                                                                        *z0*=tmp[t];
-                                                                }
-                                                        }
-                                                        if(hh==3){
-                                                                for(int t=0;t<ii;t++,z0++,z1++,z2++){
-                                                                        *z0*=tmp[t];
-                                                                        *z1*=tmp[t];
-                                                                        *z2*=tmp[t];
-                                                                }
-                                                        }
-                                                }
+                                	if(hh==2){
+                                        	for(int t=0;t<ii;t++,z0++,z1++){
+                                                	*z0*=tmp[t];
+                                                        *z1*=tmp[t];
+                                                }   
+                                        }   
+                                     	if(hh==1){
+                                               	for(int t=0;t<ii;t++,z0++){
+                                                       	*z0*=tmp[t];
+                                              	}
+                                      	}
+                                      	if(hh==3){
+                                             	for(int t=0;t<ii;t++,z0++,z1++,z2++){
+                                                      	*z0*=tmp[t];
+                                                       	*z1*=tmp[t];
+                                                       	*z2*=tmp[t];
+                                             	}
+                                      	}
+                              	}
 				x0+=ii,x1+=ii,x2+=ii,x3+=ii;
 				y0=x0,y1=x1,y2=x2,y3=x3;
 				z0=y0,z1=y1,z2=y2,z3=y3;
@@ -448,25 +448,25 @@ int main(int argc,char *argv[]){
 				z0=y0,z1=y1,z2=y2,z3=y3;
 			}
 			if(hh){
-                                                        if(hh==2){
-                                                                for(int t=0;t<ii;t++,z0++,z1++){
-                                                                        *z0*=tmp[t];
-                                                                        *z1*=tmp[t];
-                                                                }   
-                                                        }   
-                                                        if(hh==1){
-                                                                for(int t=0;t<ii;t++,z0++){
-                                                                        *z0*=tmp[t];
-                                                                }
-                                                        }
-                                                        if(hh==3){
-                                                                for(int t=0;t<ii;t++,z0++,z1++,z2++){
-                                                                        *z0*=tmp[t];
-                                                                        *z1*=tmp[t];
-                                                                        *z2*=tmp[t];
-                                                                }
-                                                        }
-                                                }
+                               	if(hh==2){
+                                       	for(int t=0;t<ii;t++,z0++,z1++){
+                                       		*z0*=tmp[t];
+                                              	*z1*=tmp[t];
+                           		}   
+                            	}   
+                             	if(hh==1){
+                                     	for(int t=0;t<ii;t++,z0++){
+                                             	*z0*=tmp[t];
+                                   	}
+                          	}
+                              	if(hh==3){
+                                    	for(int t=0;t<ii;t++,z0++,z1++,z2++){
+                                             	*z0*=tmp[t];
+                                               	*z1*=tmp[t];
+                                               	*z2*=tmp[t];
+                                      	}
+                             	}
+                     	}
 			x0+=ii,x1+=ii,x2+=ii,x3+=ii;
 			y0=x0,y1=x1,y2=x2,y3=x3;
 			z0=y0,z1=y1,z2=y2,z3=y3;
