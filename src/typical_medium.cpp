@@ -54,7 +54,7 @@ int main(int argc,char *argv[]){
 		sumofcol[i]=(double)rand()/(double)(RAND_MAX)*100;
 	}
 	
-	//start loop
+	//start
 	int count=0;
 	bool loop=true;
 	double time=0;
