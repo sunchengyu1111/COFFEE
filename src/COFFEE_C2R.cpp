@@ -41,7 +41,7 @@ int main(int argc,char *argv[]){
 	MPI_Bcast(sumofrow,m*w,MPI_DOUBLE,0,MPI_COMM_WORLD);
 	MPI_Bcast(sumofcol,n,MPI_DOUBLE,0,MPI_COMM_WORLD);
 	
-	//start loop
+	//start
 	int count=0;
 	double error=0;
 	bool loop=true;
