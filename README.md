@@ -19,14 +19,14 @@ $ cd src && make
 Supercomputers using other compilers need to modify the makefile.
 
 ## Running
-Every executable file has a corresponding .sh file with the same name.
+* Every executable file has a corresponding .sh file with the same name.
 For example, you can run COFFEE_serial with COFFEE_serial.sh in single-node.
 ```bash
 $ sh COFFEE_serial.sh
 ```
-You can also run on multi-nodes on a supercomputer or in a distributed environment built by yourself. Here is a tutorial [Running an MPI Cluster within a LAN](https://mpitutorial.com/tutorials/running-an-mpi-cluster-within-a-lan/) to help you build an MPI cluster environment.
+* You can also run on multi-nodes on a supercomputer or in a distributed environment built by yourself. Here is a tutorial [Running an MPI Cluster within a LAN](https://mpitutorial.com/tutorials/running-an-mpi-cluster-within-a-lan/) to help you build an MPI cluster environment.
 
-In our experiments, we evaluate the effectiveness of COFFEE using three representative platforms: AMD Ryzen7 4800H on Lenovo R9000X, Intel Xeon Westmere EP on Tianhe-X supercomputer, and ARM V8 on Mac M1 pro. The table lists the main configuration parameters of the above hardware platforms.
+* In our experiments, we evaluate the effectiveness of COFFEE using three representative platforms: AMD Ryzen7 4800H on Lenovo R9000X, Intel Xeon Westmere EP on Tianhe-X supercomputer, and ARM V8 on Mac M1 pro. The table lists the main configuration parameters of the above hardware platforms.
 
 \                |AMD    |Intel  |ARM V8 |
 -----------------|-------|-------|-------|
