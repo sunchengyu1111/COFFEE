@@ -26,7 +26,7 @@ $ sh COFFEE_serial.sh
 ```
 You can also run on multi-nodes on a supercomputer or in a distributed environment built by yourself. Here is a tutorial [Running an MPI Cluster within a LAN](https://mpitutorial.com/tutorials/running-an-mpi-cluster-within-a-lan/) to help you build an MPI cluster environment.
 
-In our scripts, we evaluate the effectiveness of COFFEE using three representative platforms: AMD Ryzen7 4800H on Lenovo R9000X, Intel Xeon Westmere EP on Tianhe-X supercomputer, and ARM V8 on Mac M1 pro. The table lists the main configuration parameters of the above hardware platforms.
+In our experiments, we evaluate the effectiveness of COFFEE using three representative platforms: AMD Ryzen7 4800H on Lenovo R9000X, Intel Xeon Westmere EP on Tianhe-X supercomputer, and ARM V8 on Mac M1 pro. The table lists the main configuration parameters of the above hardware platforms.
 
 \                |AMD    |Intel  |ARM V8 |
 -----------------|-------|-------|-------|
