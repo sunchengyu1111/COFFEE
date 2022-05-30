@@ -16,7 +16,6 @@ int main(int argc,char *argv[]){
 	double *copy_sinkhorn=new double[m*n];
     	double *sumofrow=new double[m];
 	double *sumofcol=new double[n];
-	//srand((unsigned int)time(NULL));
 	for(int i=0;i<m*n;i+=k){
 		int temp=rand()%k;
 		for(int j=0;j<k;j++){
@@ -54,7 +53,7 @@ int main(int argc,char *argv[]){
 		sumofcol[i]=(double)rand()/(double)(RAND_MAX)*100;
 	}
 	
-	//start loop
+	//start
 	int count=0;
 	bool loop=true;
 	double time=0;
