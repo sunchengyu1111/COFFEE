@@ -45,7 +45,7 @@ int main(int argc,char *argv[]){
 	MPI_Bcast(sumofrow,m*w,MPI_DOUBLE,0,MPI_COMM_WORLD);
 	MPI_Bcast(sumofcol,n,MPI_DOUBLE,0,MPI_COMM_WORLD);
 	
-	//start loop
+	//start
 	int count=0;
 	double error=0;
 	bool loop=true;
@@ -84,7 +84,7 @@ int main(int argc,char *argv[]){
 			}
 			local_sumofcol[i]=temp;
 		}
-		//usleep(1817000);
+		usleep(2245000);
 		MPI_RingAllreduce(local_sumofcol,allreduce_sumofcol,n,MPI_DOUBLE);
 		for(int i=0;i<n;i++){
 			double temp=sumofcol[i]/allreduce_sumofcol[i];
