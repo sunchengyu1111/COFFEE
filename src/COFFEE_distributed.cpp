@@ -112,7 +112,7 @@ int main(int argc,char *argv[]){
                 MPI_Recv(local_sinkhorn+m*n,temp,MPI_DOUBLE,local_size-1,local_rank,local_comm,&worker_status);
         }
 
-        //start loop
+        //start
         int count=0;
 	const int ii=1440,jj=4;
 	double tmp[ii];
@@ -123,7 +123,7 @@ int main(int argc,char *argv[]){
 	int each_itercommlen=each_iterlength/(local_size-1);
 	start=MPI_Wtime();
         while(loop){
-		//copy result
+		//copy data
                 if(world_rank==0){
                         //printf("count:%d\n",count);
                         count++;
@@ -132,7 +132,7 @@ int main(int argc,char *argv[]){
                         copy_sinkhorn[i]=local_sinkhorn[i];
                 }
 
-                //row operation
+                //row
                 int start_row=world_rank*m;
                 for(int i=0;i<m;i++){
                         double temp=0;
@@ -145,8 +145,7 @@ int main(int argc,char *argv[]){
                         }
                 }
                 
-                //col operation
-		//calculate local sum
+                //col
 		for(int i=0;i<n;i++) local_sumofcol[i]=0;
 		int tep=0;
 		for(int i=0;i<m*n;i++){
@@ -154,28 +153,14 @@ int main(int argc,char *argv[]){
 			tep++;
 			if(tep==n) tep=0;	
 		}
-		/*
-                for(int i=0;i<n;i++){
-                        double temp=0;
-                        for(int j=0;j<m;j++){
-                                temp+=local_sinkhorn[i+j*n];
-                        }
-                        local_sumofcol[i]=temp;
-		}
-		*/
 		
-		//do first reduce
 		if(MPI_COMM_NULL!=worker_comm) MPI_Reduce_scy(local_sumofcol,reduce_sumofcol,each_iterlength,each_itercommlen,0,local_rank,local_comm,local_size-1,0);
-			
-		//do next total_iternum-1 iteration
 		for(int i=1;i<total_iternum;i++){
-			//send i-1 reduce data
 			if(MPI_COMM_NULL!=worker_comm){
 				for(int j=0;j<local_size-1;j++){
 					if(local_rank==j) MPI_Send(reduce_sumofcol+(i-1)*each_iterlength+j*each_itercommlen,each_itercommlen,MPI_DOUBLE,local_size-1,2021+j,local_comm);
 				}
 			}
-			//recv i-1 reduce data
 			if(MPI_COMM_NULL!=manager_comm){
 				for(int j=0;j<local_size-1;j++){
 					MPI_Recv(allreduce_sumofcol+j*each_itercommlen,each_itercommlen,MPI_DOUBLE,j,2021+j,local_comm,MPI_STATUS_IGNORE);
@@ -190,8 +175,6 @@ int main(int argc,char *argv[]){
 				}
 				*/
 			}
-			
-			//do i reduce
 			if(MPI_COMM_NULL!=worker_comm){
 				int each_iteroffset=i*each_iterlength;
 				//do i reduce
@@ -211,9 +194,7 @@ int main(int argc,char *argv[]){
                 				}
 				        }
 					*/
-		        	}else{
-				//i>1 count col
-					
+		        	}else{	
 					int kk=m2/jj,hh=m2%jj;
 					double *x0=&local_sinkhorn[(i-2)*each_iterlength],*x1=&local_sinkhorn[n+(i-2)*each_iterlength],*x2=&local_sinkhorn[2*n+(i-2)*each_iterlength],*x3=&local_sinkhorn[3*n+(i-2)*each_iterlength];
 					double *y0=x0,*y1=x1,*y2=x2,*y3=x3,*z0=x0,*z1=x1,*z2=x2,*z3=x3;
@@ -256,7 +237,6 @@ int main(int argc,char *argv[]){
 						y0=x0,y1=x1,y2=x2,y3=x3;
 						z0=y0,z1=y1,z2=y2,z3=y3;
 					}
-					
 					/*	
 					for(int a=(i-2)*each_iterlength;a<(i-1)*each_iterlength;a++){
 						double temp=sumofcol[a]/allreduce_sumofcol[a];
@@ -295,8 +275,6 @@ int main(int argc,char *argv[]){
 				printf("\n");   
 			}
 			*/
-
-			//do i-1 allreduce
 			if(MPI_COMM_NULL!=manager_comm){
 				//i==1 send local data to worker
 				MPI_Request manager_request;
@@ -311,7 +289,7 @@ int main(int argc,char *argv[]){
 					allreduce_sumofcol[j]+=local_sumofcol[j+(i-1)*each_iterlength];
 				}
 				//do i-1 allreduce
-				usleep(110000);
+				usleep(160000);
 				MPI_Allreduce(allreduce_sumofcol,local_sumofcol+(i-1)*each_iterlength,each_iterlength,MPI_DOUBLE,MPI_SUM,manager_comm);
 				//check
 				if(i==1) MPI_Wait(&manager_request,&manager_status);
@@ -323,8 +301,6 @@ int main(int argc,char *argv[]){
 				printf("\n");
                 	  	*/      
                 	}
-			
-			//do i-1 bcast
 			MPI_Bcast(local_sumofcol+(i-1)*each_iterlength,each_iterlength,MPI_DOUBLE,local_size-1,local_comm);
 			/*
                         printf("rank:%d,here6,local_sumofcol\n",world_rank);
@@ -334,8 +310,6 @@ int main(int argc,char *argv[]){
                         printf("\n");
                        	*/
 		}
-		
-		//do last iteration
 		if(MPI_COMM_NULL!=worker_comm){
 			for(int i=0;i<local_size-1;i++){
 				if(local_rank==i) MPI_Send(reduce_sumofcol+(total_iternum-1)*each_iterlength+i*each_itercommlen,each_itercommlen,MPI_DOUBLE,local_size-1,2021+i,local_comm);
@@ -353,10 +327,7 @@ int main(int argc,char *argv[]){
                         printf("\n");
                         */
                 }
-
-		//do last-1 count col
 		if(MPI_COMM_NULL!=worker_comm){
-			
 			int kk=m2/jj,hh=m2%jj;
 			double *x0=&local_sinkhorn[(total_iternum-2)*each_iterlength],*x1=&local_sinkhorn[n+(total_iternum-2)*each_iterlength],*x2=&local_sinkhorn[2*n+(total_iternum-2)*each_iterlength],*x3=&local_sinkhorn[3*n+(total_iternum-2)*each_iterlength];
 			double *y0=x0,*y1=x1,*y2=x2,*y3=x3,*z0=x0,*z1=x1,*z2=x2,*z3=x3;
@@ -398,8 +369,7 @@ int main(int argc,char *argv[]){
 				x0+=ii,x1+=ii,x2+=ii,x3+=ii;
 				y0=x0,y1=x1,y2=x2,y3=x3;
 				z0=y0,z1=y1,z2=y2,z3=y3;
-			}
-			
+			}		
 			/*
 			for(int a=(total_iternum-2)*each_iterlength;a<(total_iternum-1)*each_iterlength;a++){
 				double temp=sumofcol[a]/allreduce_sumofcol[a];
@@ -428,13 +398,11 @@ int main(int argc,char *argv[]){
 			}
 			*/
 		}
-
-		//do last allreduce
                 if(MPI_COMM_NULL!=manager_comm){
                         for(int j=0;j<each_iterlength;j++){
                                 allreduce_sumofcol[j]+=local_sumofcol[j+(total_iternum-1)*each_iterlength];
                         }
-			usleep(110000);
+			usleep(160000);
                         MPI_Allreduce(allreduce_sumofcol,local_sumofcol+(total_iternum-1)*each_iterlength,each_iterlength,MPI_DOUBLE,MPI_SUM,manager_comm);
 			/*                              
                         printf("rank:%d,here9,allreduce_sumofcol\n",world_rank);
@@ -444,8 +412,6 @@ int main(int argc,char *argv[]){
                        	printf("\n");
 			*/
                 }
-		
-		//do last bcast
 		MPI_Bcast(local_sumofcol+(total_iternum-1)*each_iterlength,each_iterlength,MPI_DOUBLE,local_size-1,local_comm);
 		/*		
 		printf("rank:%d,here10,local_sumofcol\n",world_rank);
@@ -454,8 +420,6 @@ int main(int argc,char *argv[]){
                 }
                 printf("\n");
 		*/
-		
-		//recv last data
 		if(MPI_COMM_NULL!=manager_comm){
 			int temp=m*n/(local_size-1);
 			for(int i=0;i<local_size-1;i++){
@@ -465,9 +429,6 @@ int main(int argc,char *argv[]){
 			int temp=m*n/(local_size-1);
 			MPI_Send(local_sinkhorn+m*n,temp,MPI_DOUBLE,local_size-1,local_rank,local_comm);
 		}
-		
-		//count last col
-		
 		int kk=m/jj,hh=m%jj;
 		double *x0=&local_sinkhorn[(total_iternum-1)*each_iterlength],*x1=&local_sinkhorn[n+(total_iternum-1)*each_iterlength],*x2=&local_sinkhorn[2*n+(total_iternum-1)*each_iterlength],*x3=&local_sinkhorn[3*n+(total_iternum-1)*each_iterlength];
 		double *y0=x0,*y1=x1,*y2=x2,*y3=x3,*z0=x0,*z1=x1,*z2=x2,*z3=x3;
@@ -510,7 +471,6 @@ int main(int argc,char *argv[]){
 			y0=x0,y1=x1,y2=x2,y3=x3;
 			z0=y0,z1=y1,z2=y2,z3=y3;
 		}
-		
 		/*
 		for(int a=(total_iternum-1)*each_iterlength;a<n;a++){
 			double temp=sumofcol[a]/allreduce_sumofcol[a];
@@ -520,12 +480,11 @@ int main(int argc,char *argv[]){
 		}
 		*/
 
-		//count error
+		//cal error
                	for(int i=0;i<m*n;i++){
                         temp2=fabs(local_sinkhorn[i]-copy_sinkhorn[i]);
                         temp1+=temp2*temp2;
                 }
-
                 MPI_Allreduce(&temp1,&error,1,MPI_DOUBLE,MPI_SUM,MPI_COMM_WORLD);
                 error=sqrt(error);
                 //if(world_rank==0) printf("rank:%d,error:%f\n",error);
@@ -537,7 +496,7 @@ int main(int argc,char *argv[]){
         MPI_Allreduce(&time01,&time1,1,MPI_DOUBLE,MPI_MIN,MPI_COMM_WORLD);
         if(world_rank==0) printf("%f, ",time1);
 
-	//end
+	//finish
         MPI_Finalize();
         delete []sumofrow;
         delete []sumofcol;
