@@ -14,7 +14,6 @@ int main(int argc,char *argv[]){
 	MPI_Init(NULL,NULL);
 	MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
 	MPI_Comm_size(MPI_COMM_WORLD, &world_size);
-	
     	double *local_sinkhorn=new double[m*n];
 	double *copy_sinkhorn=new double[m*n];
 	double *sumofcol=new double[n];
@@ -50,7 +49,6 @@ int main(int argc,char *argv[]){
 	time01=(finish-start)*1000;
 	MPI_Allreduce(&time01,&time1,1,MPI_DOUBLE,MPI_MIN,MPI_COMM_WORLD);
 	if(world_rank==0) printf("%.3f, ",time1);
-	
 		
 	start=MPI_Wtime();
 	for(int i=0;i<n;i++) local_sumofcol[i]=0;
@@ -72,7 +70,6 @@ int main(int argc,char *argv[]){
         time01=(finish-start)*1000;
         MPI_Allreduce(&time01,&time1,1,MPI_DOUBLE,MPI_MIN,MPI_COMM_WORLD);
         if(world_rank==0) printf("%.3f, ",time1);
-	
 	
 	start=MPI_Wtime();
 	__m256d vec_0=_mm256_setzero_pd();__m256d vec_1=_mm256_setzero_pd();__m256d vec_2=_mm256_setzero_pd();__m256d vec_3=_mm256_setzero_pd();
@@ -129,7 +126,6 @@ int main(int argc,char *argv[]){
 			temp3+=fabs(local_sinkhorn[j+i*n]-copy_sinkhorn[j+i*n]);
 		}
 	}
-	
 	//if(world_rank==0) printf("error2=%f\n",temp3);
 	
 	MPI_Finalize();	
