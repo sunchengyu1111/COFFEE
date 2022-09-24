@@ -41,7 +41,7 @@ RAM              |16 GB  |48 GB  |16 GB  |
 When finishing executing, you can find running time results in .log file with the same name.
 For example, COFFEE_serial.log.
 
-## Contributor
-[@sunchengyu1111](https://github.com/sunchengyu1111)
+//## Contributor
+//[@sunchengyu1111](https://github.com/sunchengyu1111)
 
-Contact: Chengyu Sun (scyna1024@gmail.com)
+//Contact: Chengyu Sun (scyna1024@gmail.com)
