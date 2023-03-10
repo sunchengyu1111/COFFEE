@@ -471,6 +471,7 @@ int main(int argc,char *argv[]){
 			y0=x0,y1=x1,y2=x2,y3=x3;
 			z0=y0,z1=y1,z2=y2,z3=y3;
 		}
+		
 		/*
 		for(int a=(total_iternum-1)*each_iterlength;a<n;a++){
 			double temp=sumofcol[a]/allreduce_sumofcol[a];
